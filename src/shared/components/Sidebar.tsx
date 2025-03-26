@@ -2,12 +2,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { LogOut, Menu } from 'lucide-react'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '@/features/auth/hooks/useAuth'
+import { useState } from 'react'
 
 export const Sidebar = () => {
   const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
 
   if (!user) return null // Se não estiver logado, não exibe o menu
 
@@ -22,9 +24,9 @@ export const Sidebar = () => {
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" className="fixed top-4 left-4">
+        <Button variant="outline" className="fixed top-4 left-4" onClick={() => setOpen(!open)}>
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
@@ -40,6 +42,7 @@ export const Sidebar = () => {
               key={path}
               to={path}
               className={`block p-2 rounded ${location.pathname === path ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              onClick={() => setOpen(false)}
             >
               {name}
             </Link>

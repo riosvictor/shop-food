@@ -1,5 +1,5 @@
-import { useOrders } from '../hooks/useOrders'
-import { updateOrderStatus } from '../libs/firestore' // Função para atualizar status no banco
+import { useOrders } from '../features/orders/hooks/useOrders'
+import { updateOrderStatus } from '@/shared/libs/firestore' // Função para atualizar status no banco
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 

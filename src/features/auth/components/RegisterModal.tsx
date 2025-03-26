@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog'
-import { InputField } from './InputField'
+import { InputField } from '@/shared/components/InputField'
 import { Button } from '@/components/ui/button'
 
 interface RegisterModalProps {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { listenOrders } from '../libs/firestore'
-import { TOrderListener } from '../types/entities'
+import { listenOrders } from '@/shared/libs/firestore'
+import { TOrderListener } from '@/shared/types/entities'
 
 export const useOrders = () => {
   const [orders, setOrders] = useState<TOrderListener[]>([])
