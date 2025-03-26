@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
-import { useAuth } from '../hooks/useAuth'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { useNavigate } from 'react-router-dom'
+import { Loading } from '../../../shared/components/Loading'
+import { useAuth } from '../hooks/useAuth'
 import { LoginForm } from '../components/LoginForm'
 import { RegisterModal } from '../components/RegisterModal'
 
 export const Login = () => {
   const { login, register, user, initialLoading } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [loading, setLoading] = useState(false)
   const [isRegistering, setIsRegistering] = useState(false)
   const [registerEmail, setRegisterEmail] = useState('')
@@ -15,9 +17,10 @@ export const Login = () => {
 
   useEffect(() => {
     if (!initialLoading && user) {
-      navigate('/tables')
+      const from = location.state?.from?.pathname || '/tables' // Pega a página anterior ou manuseia o fallback
+      navigate(from, { replace: true })
     }
-  }, [initialLoading, user, navigate])
+  }, [initialLoading, user, navigate, location])
 
   const handleLogin = async (email: string, password: string) => {
     setLoading(true)
@@ -57,8 +60,8 @@ export const Login = () => {
 
   if (initialLoading) {
     return (
-      <div className="container mx-auto p-6">
-        <p className="text-center">Carregando...</p>
+      <div className="flex items-center justify-center h-screen">
+        <Loading message="Carregando..." size="lg" />
       </div>
     )
   }
