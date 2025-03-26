@@ -109,12 +109,10 @@ export const listenOrders = (callback: (orders: TOrderListener[]) => void) => {
 }
 
 export const listenTableOrders = (tableId: string, callback: (orders: TOrder[]) => void) => {
-  const tableRef = doc(db, docs.TABLES, tableId)
-  return onSnapshot(tableRef, (tableSnapshot) => {
-    const tableData = tableSnapshot.data()
+  const ordersQuery = query(ordersCollection, where('tableId', '==', tableId))
 
-    if (!tableData) return
-
-    callback(tableData.orders)
+  return onSnapshot(ordersQuery, (snapshot) => {
+    const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as TOrder[]
+    callback(orders)
   })
 }

@@ -31,6 +31,7 @@ export const Login = () => {
       toast.error('Erro de Login', {
         description: 'Credenciais inválidas!'
       })
+      throw new Error('Credenciais inválidas')
     } finally {
       setLoading(false)
     }

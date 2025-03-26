@@ -1,49 +1,32 @@
-import { useOrders } from '../features/orders/hooks/useOrders'
-import { updateOrderStatus } from '@/shared/libs/firestore' // Função para atualizar status no banco
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { useEffect, useState } from 'react'
+import { listenOrders } from '@/shared/libs/firestore'
+import { TOrderListener } from '@/shared/types/entities'
 
 export const Kitchen = () => {
-  const { orders, setOrders } = useOrders() // Hook de pedidos em tempo real
+  const [orders, setOrders] = useState<TOrderListener[]>([])
 
-  // Filtra apenas pedidos com status "pendente"
-  const pendingOrders = orders.filter((order) => order.status === 'pending')
-
-  // Marcar pedido como pronto e atualizar banco de dados
-  const handleCompleteOrder = async (orderId: string) => {
-    await updateOrderStatus(orderId, 'ready') // Atualiza no Firestore
-    setOrders((prevOrders) => prevOrders.filter((order) => order.id !== orderId)) // Remove da tela
-  }
+  useEffect(() => {
+    const unsubscribe = listenOrders(setOrders)
+    return () => unsubscribe()
+  }, [])
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Lista de Preparo</h1>
-
-      {pendingOrders.length === 0 ? (
-        <p className="text-center text-gray-500">Nenhum pedido pendente</p>
+      <h1 className="text-2xl font-bold mb-4">Pedidos Pendentes</h1>
+      {orders.length === 0 ? (
+        <p className="text-gray-500 text-center">Nenhum item pendente.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {pendingOrders.map((order) => (
-            <Card key={order.id} className="bg-yellow-50 border-yellow-300">
-              <CardHeader>
-                <CardTitle>Mesa {order.tableId}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {order.items.map((item, index) => (
-                  <div key={index} className="flex justify-between p-2 border-b last:border-b-0">
-                    <span>{item.name}</span>
-                    <span className="font-bold">x</span>
-                  </div>
-                ))}
-                <Button
-                  className="mt-4 w-full bg-green-500 hover:bg-green-600"
-                  onClick={() => handleCompleteOrder(order.id)}
-                >
-                  Marcar como Pronto
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+          {orders.map((order) =>
+            order.items
+              .filter((item) => item.status === 'pending')
+              .map((item) => (
+                <div key={item.id} className="border p-4 rounded-lg">
+                  <p>{item.name}</p>
+                  <p className="text-sm text-gray-500">Mesa: {order.tableId}</p>
+                </div>
+              ))
+          )}
         </div>
       )}
     </div>

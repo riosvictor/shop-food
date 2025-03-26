@@ -1,40 +1,54 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { listenTableOrders, addOrderItem, removeOrderItem } from '@/shared/libs/firestore'
+import { listenTableOrders, addOrderItem } from '@/shared/libs/firestore'
 import { TOrder, TItem } from '@/shared/types/entities'
 import { OrderItemInput } from '../components/OrderItemInput'
 import { OrderList } from '../components/OrderList'
+import { ConfirmOrderModal } from '../components/ConfirmOrderModal'
 
 export const Order = () => {
   const { tableId, orderId } = useParams<{ tableId: string; orderId: string }>()
-  const [orders, setOrders] = useState<TOrder[]>([])
-  const [newItem, setNewItem] = useState('')
+  const [order, setOrder] = useState<TOrder | null>(null)
+  const [newItems, setNewItems] = useState<TItem[]>([]) // Itens pendentes
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     if (!tableId) return
-    const unsubscribe = listenTableOrders(tableId, setOrders)
+    const unsubscribe = listenTableOrders(tableId, (orders) => {
+      const currentOrder = orders.find((o) => o.id === orderId) || null
+      setOrder(currentOrder)
+    })
     return () => unsubscribe()
-  }, [tableId])
+  }, [tableId, orderId])
 
   const handleAddItem = async () => {
-    if (!orderId || newItem.trim() === '') return
-    const newItemObj: TItem = { id: Date.now().toString(), name: newItem, status: 'pending' }
-    await addOrderItem(orderId, newItemObj)
-    setNewItem('')
-  }
-
-  const handleRemoveItem = async (orderId: string, itemId: string) => {
-    if (!tableId) return
-    await removeOrderItem(orderId, itemId)
+    if (!orderId || newItems.length === 0) return
+    await Promise.all(newItems.map((item) => addOrderItem(orderId, item)))
+    setNewItems([])
+    setIsModalOpen(false)
   }
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-2xl font-bold mb-6">
         Pedido #{orderId} - Mesa {tableId}
       </h1>
-      <OrderItemInput newItem={newItem} setNewItem={setNewItem} onAddItem={handleAddItem} />
-      <OrderList orders={orders} onRemoveItem={handleRemoveItem} />
+
+      {order?.owner && (
+        <p className="text-lg mb-4">
+          <strong>Pedido de:</strong> {order.owner}
+        </p>
+      )}
+
+      <OrderItemInput newItems={newItems} setNewItems={setNewItems} onOpenModal={() => setIsModalOpen(true)} />
+      <OrderList order={order} />
+
+      <ConfirmOrderModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        newItems={newItems}
+        onConfirm={handleAddItem}
+      />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { InputField } from '@/shared/components/InputField'
 
 type LoginFormProps = {
-  onSubmit: (email: string, password: string) => void
+  onSubmit: (email: string, password: string) => Promise<void>
   loading?: boolean
 }
 
@@ -13,9 +13,11 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading = false }) => 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmit(email, password) // Passa os dados para o pai
-    setEmail('') // Limpa o campo de email após o envio
-    setPassword('') // Limpa o campo de senha após o envio
+
+    onSubmit(email, password).then(() => {
+      setEmail('')
+      setPassword('')
+    })
   }
 
   return (
