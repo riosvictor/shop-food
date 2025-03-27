@@ -18,6 +18,7 @@
   - 📊 Exibe o status dos itens.
   - 📈 Adiciona quantidade a um item selecionado.
   - 💰 Apresenta o preço do produto.
+  - Possui uma lista de produtos com busca, tornando a experiência mais dinâmica.
 
 ### 👩‍🍳 Tela 3 - Cozinha
 

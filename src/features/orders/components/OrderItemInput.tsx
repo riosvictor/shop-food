@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { TOrderItem } from '../../../shared/types'
 import { useProducts } from '../../products/hooks/useProducts'
+import { Combobox } from '../../../shared/components/Combobox'
 
 export const OrderItemInput = ({
   newItems,
@@ -37,19 +37,19 @@ export const OrderItemInput = ({
   return (
     <div className="flex flex-col gap-4 mb-4">
       <div className="flex gap-2">
-        <Select onValueChange={setSelectedProductId} value={selectedProductId}>
-          <SelectTrigger>
-            <SelectValue placeholder="Selecione um produto" />
-          </SelectTrigger>
-          <SelectContent>
-            {availableProducts.map((product) => (
-              <SelectItem key={product.id} value={product.id}>
-                {product.name} - R$ {product.price.toFixed(2)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {/* Usando o componente Combobox */}
+        <Combobox
+          searchPlaceholder="Pesquisar produto"
+          selectPlaceholder="Selecione um produto"
+          items={availableProducts.map((product) => ({
+            value: product.name,
+            label: `${product.name} - R$ ${product.price.toFixed(2)}`
+          }))}
+          selectedValue={selectedProductId}
+          onSelectValue={setSelectedProductId}
+        />
 
+        {/* Input de quantidade */}
         <Input
           type="number"
           value={quantity}
@@ -64,6 +64,7 @@ export const OrderItemInput = ({
         </Button>
       </div>
 
+      {/* Exibição de itens pendentes */}
       {newItems.length > 0 && (
         <div className="mt-2 p-2 border rounded bg-gray-100">
           <p className="text-sm font-semibold mb-1">Itens pendentes:</p>
@@ -85,3 +86,5 @@ export const OrderItemInput = ({
     </div>
   )
 }
+
+export default OrderItemInput
