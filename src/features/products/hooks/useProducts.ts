@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react'
-import { getAvailableProducts } from '@/shared/libs/firestore'
-
-export type TProduct = {
-  id: string
-  name: string
-  price: number
-  available: boolean
-}
+import { useEffect, useState, useCallback } from 'react'
+import { getProducts } from '@/shared/libs/firestore'
+import { TProduct } from '../../../shared/types/product'
 
 export const useProducts = () => {
   const [products, setProducts] = useState<TProduct[]>([])
+  const [availableProducts, setAvailableProducts] = useState<TProduct[]>([])
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const productsList = await getAvailableProducts()
-      setProducts(productsList)
-    }
-    fetchProducts()
+  const fetchProducts = useCallback(async () => {
+    const data = await getProducts()
+    setProducts(data)
+    setAvailableProducts(data.filter((product) => product.available))
   }, [])
 
-  return products
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
+
+  return { products, fetchProducts, availableProducts }
 }

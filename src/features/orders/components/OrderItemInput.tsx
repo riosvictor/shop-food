@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,14 +16,14 @@ export const OrderItemInput = ({
   setNewItems: (items: TOrderItem[]) => void
   onOpenModal: () => void
 }) => {
-  const products = useProducts()
+  const { availableProducts } = useProducts()
   const [selectedProductId, setSelectedProductId] = useState('')
   const [quantity, setQuantity] = useState(1)
 
   const handleAddItemToList = () => {
     if (!selectedProductId) return
 
-    const product = products.find((p) => p.id === selectedProductId)
+    const product = availableProducts.find((p) => p.id === selectedProductId)
     if (!product) return
 
     setNewItems([
@@ -40,7 +42,7 @@ export const OrderItemInput = ({
             <SelectValue placeholder="Selecione um produto" />
           </SelectTrigger>
           <SelectContent>
-            {products.map((product) => (
+            {availableProducts.map((product) => (
               <SelectItem key={product.id} value={product.id}>
                 {product.name} - R$ {product.price.toFixed(2)}
               </SelectItem>
