@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { TOrderAdd, TTable } from '@/shared/types/entities'
+import { TOrderAdd, TTable } from '@/shared/types'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { AddOrderModal } from '@/features/orders/components/AddOrderModal'

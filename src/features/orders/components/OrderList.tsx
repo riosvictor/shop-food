@@ -1,4 +1,4 @@
-import { TOrder } from '@/shared/types/entities'
+import { TOrder } from '@/shared/types'
 
 export const OrderList = ({ order }: { order: TOrder | null }) => {
   if (!order) {

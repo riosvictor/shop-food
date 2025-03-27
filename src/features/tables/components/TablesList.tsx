@@ -1,4 +1,4 @@
-import { TOrderAdd, TTable } from '@/shared/types/entities'
+import { TOrderAdd, TTable } from '@/shared/types'
 import { TableCard } from './TableCard'
 
 type TablesListProps = {

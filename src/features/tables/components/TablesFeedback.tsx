@@ -1,4 +1,4 @@
-import { TTable } from '@/shared/types/entities'
+import { TTable } from '@/shared/types'
 
 export const TablesFeedback = ({ loading, error, tables }: { loading: boolean; error: string; tables: TTable[] }) => {
   if (loading) return <p className="text-gray-500 text-center">Carregando mesas...</p>

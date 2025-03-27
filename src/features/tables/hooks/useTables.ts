@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getTablesWithOrders, addTable, addOrderToTable } from '@/shared/libs/firestore'
-import { TOrderAdd, TTable } from '@/shared/types/entities'
+import { TOrderAdd, TTable } from '@/shared/types'
 import { toast } from 'sonner'
 
 export const useTables = () => {

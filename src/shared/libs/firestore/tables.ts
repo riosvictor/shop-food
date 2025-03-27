@@ -1,6 +1,6 @@
 import { collection, getDocs, onSnapshot, addDoc, query, where } from 'firebase/firestore'
 import { db } from '../firebase'
-import { TOrder, TOrderAdd, TTable, TTableAdd } from '../../types/entities'
+import { TOrder, TOrderAdd, TTable, TTableAdd } from '../../types'
 import { firebaseDocuments } from '../../helpers/constants'
 
 const tablesCollection = collection(db, firebaseDocuments.TABLES)

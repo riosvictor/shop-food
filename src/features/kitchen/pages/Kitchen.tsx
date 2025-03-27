@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { listenOrders } from '@/shared/libs/firestore'
-import { TOrderItemKitchen, TOrderListener } from '@/shared/types/entities'
+import { TOrderItemKitchen, TOrderListener } from '@/shared/types'
 import { OrderItem } from '../components/OrderItem'
 
 const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] => {

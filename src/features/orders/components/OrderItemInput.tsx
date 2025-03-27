@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { TOrderItem } from '@/shared/types/entities'
+import { TOrderItem } from '@/shared/types'
 
 export const OrderItemInput = ({
   newItems,

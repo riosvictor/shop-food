@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogFooter } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { TOrderItem } from '@/shared/types/entities'
+import { TOrderItem } from '@/shared/types'
 
 interface ConfirmOrderModalProps {
   isOpen: boolean

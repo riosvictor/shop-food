@@ -1,6 +1,6 @@
 import { collection, doc, updateDoc, onSnapshot, getDoc, arrayUnion, query, where } from 'firebase/firestore'
 import { db } from '../firebase'
-import { TOrderItem, TOrder, TOrderListener } from '../../types/entities'
+import { TOrderItem, TOrder, TOrderListener } from '../../types'
 import { firebaseDocuments } from '../../helpers/constants'
 
 const ordersCollection = collection(db, firebaseDocuments.ORDERS)

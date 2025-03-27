@@ -1,6 +1,6 @@
 import { doc, updateDoc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
-import { TOrderItem } from '../../types/entities'
+import { TOrderItem } from '../../types'
 import { firebaseDocuments } from '../../helpers/constants'
 
 export const updateItemStatus = async (orderId: string, itemId: string, status: string) => {

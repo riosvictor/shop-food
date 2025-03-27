@@ -2,7 +2,7 @@ import { auth, db } from '../firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth'
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
 import { firebaseDocuments, userRoles } from '../../helpers/constants'
-import { AuthUser } from '../../types/entities'
+import { AuthUser } from '../../types'
 
 const usersCollection = collection(db, firebaseDocuments.USERS)
 

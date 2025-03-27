@@ -1,4 +1,4 @@
-import { TOrderItemKitchen } from '@/shared/types/entities'
+import { TOrderItemKitchen } from '@/shared/types'
 import { updateItemStatus } from '@/shared/libs/firestore'
 import { Button } from '@/components/ui/button'
 

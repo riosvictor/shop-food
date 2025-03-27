@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { listenTableOrders, addOrderItem } from '@/shared/libs/firestore'
-import { TOrder, TOrderItem } from '@/shared/types/entities'
+import { TOrder, TOrderItem } from '@/shared/types'
 import { OrderItemInput } from '../components/OrderItemInput'
 import { OrderList } from '../components/OrderList'
 import { ConfirmOrderModal } from '../components/ConfirmOrderModal'
