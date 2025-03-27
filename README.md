@@ -1,54 +1,29 @@
-# React + TypeScript + Vite
+# 🛒 Shop Food
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌟 Funcionalidades do Aplicativo
 
-Currently, two official plugins are available:
+### 🪑 Tela 1 - Mesas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📋 Exibe mesas de forma ordenada.
+- ➕ Adiciona uma mesa (com numeração incremental).
+- 🔄 Atualiza automaticamente as telas de mesas.
+- 📝 Adiciona pedidos a uma mesa.
 
-## Expanding the ESLint configuration
+### 🍽️ Tela 2 - Pedidos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔍 Exibe informações sobre o pedido selecionado.
+- ➕ Adiciona itens:
+  - 🆕 Mostra itens recém-adicionados.
+  - ✅ Confirma os itens adicionados ao pedido.
+  - 📊 Exibe o status dos itens.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 👩‍🍳 Tela 3 - Cozinha
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 🍴 Exibe itens pendentes de preparo ou entrega:
+  - 🔄 Atualiza a lista com base na ordem dos eventos de criação de itens no Firebase.
+- 🚚 Fornece uma opção para marcar um item como entregue:
+  - ✅ Atualiza o status do item.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Funcionalidades Futuras
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Funcionalidades futuras estão descritas no documento [TODO.md](./TODO.md). Consulte-o para mais detalhes.
