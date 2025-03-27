@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, useEffect, useState } from 'react'
 import { observeAuthState, login, logout, register } from '@/shared/libs/firestore'
 import { AuthUser } from '../../../shared/types'

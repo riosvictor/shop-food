@@ -1,39 +1,32 @@
+'use client'
+
 import { BrowserRouter as Router, Routes, Route, matchPath, useLocation } from 'react-router-dom'
-import { Tables } from './features/tables/pages/Tables'
-import { Login } from './features/auth/pages/Login'
-import { Order } from './features/orders/pages/Order'
-import { Kitchen } from './features/kitchen/pages/Kitchen'
+import { useEffect } from 'react'
 import { PrivateRoute } from './shared/hocs/PrivateRoute'
 import { Sidebar } from './shared/components/Sidebar'
-import { useEffect } from 'react'
 
-const appName = 'Meu App'
-const routeTitles: Record<string, string> = {
-  '/': `🔑 Login - ${appName}`,
-  '/tables': `🍽️ Mesas - ${appName}`,
-  '/tables/:tableId/orders/:orderId': `🛒 Pedido - ${appName}`,
-  '/kitchen': `👨‍🍳 Cozinha - ${appName}`
-}
+import { TablesPage } from './features/tables/pages/Tables'
+import { LoginPage } from './features/auth/pages/Login'
+import { OrderPage } from './features/orders/pages/Order'
+import { KitchenPage } from './features/kitchen/pages/Kitchen'
+import { ProductsPage } from './features/products/pages/Product'
+import { appName, routesConfig } from './shared/config/routes'
 
 const AppContent = () => {
-  const location = useLocation() // Agora isso está dentro do contexto do <Router>
+  const location = useLocation()
 
   useEffect(() => {
-    let title = routeTitles[location.pathname]
+    let title = routesConfig.find((route) => route.path === location.pathname)?.title
 
-    // Verificar se estamos em uma rota dinâmica
     if (!title) {
-      // Percorrer as chaves para buscar a rota dinâmica correspondente (como /tables/:tableId/orders/:orderId)
-      for (const route in routeTitles) {
-        const match = matchPath(route, location.pathname) // Lógica de match fornecida pelo react-router
-        if (match) {
-          title = routeTitles[route]
+      for (const route of routesConfig) {
+        if (matchPath(route.path, location.pathname)) {
+          title = route.title
           break
         }
       }
     }
 
-    // Se nenhuma rota for encontrada, definir um título padrão
     document.title = title || `🏠 ${appName}`
   }, [location])
 
@@ -42,16 +35,37 @@ const AppContent = () => {
       <Sidebar />
       <div className="container mx-auto pt-8">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/tables/:tableId/orders/:orderId" element={<Order />} />
-            <Route path="/tables" element={<Tables />} />
-            <Route path="/kitchen" element={<Kitchen />} />
-          </Route>
+          {routesConfig.map(({ path, private: isPrivate }) =>
+            isPrivate ? (
+              <Route key={path} element={<PrivateRoute />}>
+                <Route path={path} element={getComponent(path)} />
+              </Route>
+            ) : (
+              <Route key={path} path={path} element={getComponent(path)} />
+            )
+          )}
         </Routes>
       </div>
     </>
   )
+}
+
+// Função auxiliar para mapear rotas para componentes
+const getComponent = (path: string) => {
+  switch (path) {
+    case '/':
+      return <LoginPage />
+    case '/tables':
+      return <TablesPage />
+    case '/tables/:tableId/orders/:orderId':
+      return <OrderPage />
+    case '/kitchen':
+      return <KitchenPage />
+    case '/products':
+      return <ProductsPage />
+    default:
+      return <h1>404 - Página não encontrada</h1>
+  }
 }
 
 const App = () => (

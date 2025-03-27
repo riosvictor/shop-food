@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -6,7 +8,7 @@ import { useAuth } from '../hooks/useAuth'
 import { LoginForm } from '../components/LoginForm'
 import { RegisterModal } from '../components/RegisterModal'
 
-export const Login = () => {
+export const LoginPage = () => {
   const { login, register, user, initialLoading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { listenOrders } from '@/shared/libs/firestore'
 import { TOrderItemKitchen, TOrderListener } from '@/shared/types'
@@ -13,7 +15,7 @@ const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] =
   return enrichedItems.flat()
 }
 
-export const Kitchen = () => {
+export const KitchenPage = () => {
   const [orders, setOrders] = useState<TOrderItemKitchen[]>([])
 
   useEffect(() => {

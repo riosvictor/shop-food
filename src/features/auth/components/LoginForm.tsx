@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, FC } from 'react'
 import { Button } from '@/components/ui/button'
 import { InputField } from '@/shared/components/InputField'

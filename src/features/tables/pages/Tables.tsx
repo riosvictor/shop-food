@@ -1,9 +1,11 @@
+'use client'
+
 import { TablesFeedback } from '../components/TablesFeedback'
 import { TablesHeader } from '../components/TablesHeader'
 import { TablesList } from '../components/TablesList'
 import { useTables } from '../hooks/useTables'
 
-export const Tables = () => {
+export const TablesPage = () => {
   const { tables, loading, error, adding, addNewTable, addOrderToTableHandler } = useTables()
 
   const showTables = !loading && !error && tables.length > 0
