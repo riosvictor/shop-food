@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { TItem } from '@/shared/types/entities'
+import { TOrderItem } from '@/shared/types/entities'
 
 export const OrderItemInput = ({
   newItems,
   setNewItems,
   onOpenModal
 }: {
-  newItems: TItem[]
-  setNewItems: (items: TItem[]) => void
+  newItems: TOrderItem[]
+  setNewItems: (items: TOrderItem[]) => void
   onOpenModal: () => void
 }) => {
   const [itemName, setItemName] = useState('')

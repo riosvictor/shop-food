@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { listenTableOrders, addOrderItem } from '@/shared/libs/firestore'
-import { TOrder, TItem } from '@/shared/types/entities'
+import { TOrder, TOrderItem } from '@/shared/types/entities'
 import { OrderItemInput } from '../components/OrderItemInput'
 import { OrderList } from '../components/OrderList'
 import { ConfirmOrderModal } from '../components/ConfirmOrderModal'
@@ -9,7 +9,7 @@ import { ConfirmOrderModal } from '../components/ConfirmOrderModal'
 export const Order = () => {
   const { tableId, orderId } = useParams<{ tableId: string; orderId: string }>()
   const [order, setOrder] = useState<TOrder | null>(null)
-  const [newItems, setNewItems] = useState<TItem[]>([]) // Itens pendentes
+  const [newItems, setNewItems] = useState<TOrderItem[]>([]) // Itens pendentes
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
@@ -30,15 +30,15 @@ export const Order = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">
-        Pedido #{orderId} - Mesa {tableId}
-      </h1>
+      <h1 className="text-2xl font-bold mb-6">Pedido #{orderId}</h1>
 
       {order?.owner && (
         <p className="text-lg mb-4">
           <strong>Pedido de:</strong> {order.owner}
         </p>
       )}
+
+      {order?.tableName && <p className="text-lg mb-4">{order?.tableName}</p>}
 
       <OrderItemInput newItems={newItems} setNewItems={setNewItems} onOpenModal={() => setIsModalOpen(true)} />
       <OrderList order={order} />

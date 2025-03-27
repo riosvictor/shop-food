@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getTablesWithOrders, addTable, addOrderToTable } from '@/shared/libs/firestore'
-import { TTable } from '@/shared/types/entities'
+import { TOrderAdd, TTable } from '@/shared/types/entities'
 import { toast } from 'sonner'
 
 export const useTables = () => {
@@ -21,7 +21,8 @@ export const useTables = () => {
   const addNewTable = async () => {
     setAdding(true)
     try {
-      await addTable({ name: `Mesa ${tables.length + 1}` })
+      const tableNumber = tables.length + 1
+      await addTable({ name: `Mesa ${tableNumber}`, number: tableNumber })
       toast.success('Mesa adicionada com sucesso!')
     } catch (e) {
       const error = e as Error
@@ -34,14 +35,14 @@ export const useTables = () => {
     }
   }
 
-  const addOrderToTableHandler = async (tableId: string, owner: string) => {
+  const addOrderToTableHandler = async (order: TOrderAdd) => {
     try {
-      const newOrder = await addOrderToTable({ tableId, owner })
+      const newOrder = await addOrderToTable(order)
 
       // Atualiza a mesa correspondente com o novo pedido
       setTables((prevTables) =>
         prevTables.map((table) => {
-          if (table.id === tableId) {
+          if (table.id === order.tableId) {
             return { ...table, orders: [...table.orders, newOrder] }
           }
           return table

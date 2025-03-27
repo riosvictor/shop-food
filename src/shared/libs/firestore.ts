@@ -11,7 +11,7 @@ import {
   where
 } from 'firebase/firestore'
 import { db } from './firebase'
-import { TItem, TOrder, TOrderAdd, TOrderListener, TTable, TTableAdd } from '../types/entities'
+import { TOrderItem, TOrder, TOrderAdd, TOrderListener, TTable, TTableAdd } from '../types/entities'
 
 const docs = {
   TABLES: 'tables',
@@ -27,16 +27,15 @@ export const getTables = async (): Promise<TTable[]> => {
 }
 
 export const addTable = async (table: TTableAdd): Promise<TTable> => {
-  const newTable = { name: table.name, status: 'available', orders: [] }
+  const newTable = { ...table, status: 'available', orders: [] }
   const docRef = await addDoc(tablesCollection, newTable)
   return { id: docRef.id, ...newTable } as TTable
 }
 
 export const addOrderToTable = async (order: TOrderAdd): Promise<TOrder> => {
-  const newOrder = {
-    tableId: order.tableId,
-    owner: order.owner,
-    status: 'pending',
+  const newOrder: Omit<TOrder, 'id'> = {
+    ...order,
+    status: 'open',
     items: []
   }
   const orderRef = await addDoc(ordersCollection, newOrder)
@@ -59,7 +58,7 @@ export const getTablesWithOrders = (callback: (tables: TTable[]) => void) => {
 }
 
 // Orders functions
-export const addOrderItem = async (orderId: string, newItem: TItem) => {
+export const addOrderItem = async (orderId: string, newItem: TOrderItem) => {
   const orderRef = doc(db, docs.ORDERS, orderId)
 
   await updateDoc(orderRef, {
@@ -75,7 +74,7 @@ export const removeOrderItem = async (orderId: string, itemId: string) => {
 
   const orderData = orderSnap.data()
 
-  const updatedItems = orderData.items.filter((item: TItem) => item.id !== itemId)
+  const updatedItems = orderData.items.filter((item: TOrderItem) => item.id !== itemId)
 
   await updateDoc(orderRef, { items: updatedItems })
 }
@@ -86,26 +85,14 @@ export const updateOrderStatus = async (orderId: string, status: string) => {
 }
 
 export const listenOrders = (callback: (orders: TOrderListener[]) => void) => {
-  const unsubscribeTables = onSnapshot(collection(db, docs.TABLES), (tableSnapshot) => {
-    const orderListeners: TOrderListener[] = []
-    tableSnapshot.docs.forEach((tableDoc) => {
-      const tableId = tableDoc.id
-      const ordersCollection = collection(db, docs.ORDERS, tableId)
-      // Agora escutamos os pedidos dentro de cada mesa em tempo real
-      const unsubscribeOrders = onSnapshot(ordersCollection, (orderSnapshot) => {
-        orderSnapshot.docs.forEach((orderDoc) => {
-          const orderData = orderDoc.data() as Omit<TOrder, 'id'> // Garante que o tipo base é TOrder sem o id
-          orderListeners.push({
-            id: orderDoc.id,
-            ...orderData
-          } as TOrderListener)
-        })
-        callback(orderListeners)
-      })
-      return unsubscribeOrders
+  return onSnapshot(collection(db, docs.ORDERS), (orderSnapshot) => {
+    const orders: TOrderListener[] = orderSnapshot.docs.map((orderDoc) => {
+      const orderData = orderDoc.data() as Omit<TOrderListener, 'id'>
+      return { id: orderDoc.id, ...orderData }
     })
+
+    callback(orders)
   })
-  return unsubscribeTables
 }
 
 export const listenTableOrders = (tableId: string, callback: (orders: TOrder[]) => void) => {
@@ -115,4 +102,26 @@ export const listenTableOrders = (tableId: string, callback: (orders: TOrder[]) 
     const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as TOrder[]
     callback(orders)
   })
+}
+
+// Items functions
+export const updateItemStatus = async (orderId: string, itemId: string, status: string) => {
+  const orderRef = doc(db, docs.ORDERS, orderId)
+  const orderSnap = await getDoc(orderRef)
+
+  if (!orderSnap.exists()) {
+    // console.warn(`⚠️ Pedido ${orderId} não encontrado!`)
+    return
+  }
+
+  const orderData = orderSnap.data()
+  const updatedItems = orderData.items.map((item: TOrderItem) => (item.id === itemId ? { ...item, status } : item))
+
+  // Verifica se realmente houve alteração antes de atualizar o documento
+  if (JSON.stringify(orderData.items) !== JSON.stringify(updatedItems)) {
+    await updateDoc(orderRef, { items: updatedItems })
+    // console.log(`✅ Item ${itemId} atualizado para ${status} no pedido ${orderId}`)
+  } else {
+    // console.warn(`⚠️ Nenhuma alteração no status do item ${itemId}`)
+  }
 }

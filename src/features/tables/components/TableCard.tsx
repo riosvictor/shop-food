@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { TTable } from '@/shared/types/entities'
+import { TOrderAdd, TTable } from '@/shared/types/entities'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { AddOrderModal } from '@/features/orders/components/AddOrderModal'
 
 type TableCardProps = {
   table: TTable
-  onAddOrder: (tableId: string, owner: string) => void
+  onAddOrder: (order: TOrderAdd) => void
 }
 
 export const TableCard = ({ table, onAddOrder }: TableCardProps) => {
@@ -49,7 +49,13 @@ export const TableCard = ({ table, onAddOrder }: TableCardProps) => {
       <AddOrderModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        onConfirm={(owner) => onAddOrder(table.id, owner)}
+        onConfirm={(owner) =>
+          onAddOrder({
+            tableId: table.id,
+            tableName: table.name,
+            owner
+          })
+        }
       />
     </Card>
   )
