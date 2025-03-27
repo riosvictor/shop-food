@@ -24,6 +24,10 @@
 - 🚚 Fornece uma opção para marcar um item como entregue:
   - ✅ Atualiza o status do item.
 
+## Níveis de acesso
+
+Para definir o nível de acesso, após o registro do usuário, vincula-se o UID do usuário ao nível de acesso desejado ('role') na coleção 'users' do Firestore.
+
 ## 🚀 Funcionalidades Futuras
 
 Funcionalidades futuras estão descritas no documento [TODO.md](./TODO.md). Consulte-o para mais detalhes.

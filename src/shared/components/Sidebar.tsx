@@ -34,6 +34,8 @@ export const Sidebar = () => {
         <SheetHeader>
           <SheetTitle className="text-lg font-semibold mb-4">Menu</SheetTitle>
           <SheetDescription>Olá, {user.email}!</SheetDescription>
+          <hr className="my-4" />
+          <SheetDescription>Nível de acesso: {user.role} </SheetDescription>
         </SheetHeader>
 
         <nav className="space-y-2">

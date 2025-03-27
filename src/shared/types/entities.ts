@@ -1,3 +1,5 @@
+import { User } from 'firebase/auth'
+
 // Table types
 export type TTableOrderSummary = {
   id: string
@@ -43,3 +45,8 @@ export type TOrderItem = {
 }
 
 export type TOrderItemKitchen = TOrderItem & { owner: string; tableName: string }
+
+// User types
+export interface AuthUser extends User {
+  role?: string
+}
