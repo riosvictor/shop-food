@@ -15,7 +15,9 @@ export const OrderList = ({ order }: { order: TOrder | null }) => {
         <ul className="space-y-2 mb-4">
           {confirmedItems.map((item) => (
             <li key={item.id} className="flex justify-between border-b pb-1">
-              <span>{item.name}</span>
+              <span>
+                {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
+              </span>
               <span className="text-sm text-gray-500 capitalize">({item.status})</span>
             </li>
           ))}

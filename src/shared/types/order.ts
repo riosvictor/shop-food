@@ -18,6 +18,8 @@ export type TOrderListener = TOrder & { tableName: string }
 export type TOrderItem = {
   id: string
   name: string
+  price: number
+  quantity: number
   status: 'pending' | 'preparing' | 'delivered'
 }
 

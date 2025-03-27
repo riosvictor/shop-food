@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { TOrderItem } from '@/shared/types'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { TOrderItem } from '../../../shared/types'
+import { useProducts } from '../../products/hooks/useProducts'
 
 export const OrderItemInput = ({
   newItems,
@@ -12,20 +14,51 @@ export const OrderItemInput = ({
   setNewItems: (items: TOrderItem[]) => void
   onOpenModal: () => void
 }) => {
-  const [itemName, setItemName] = useState('')
+  const products = useProducts()
+  const [selectedProductId, setSelectedProductId] = useState('')
+  const [quantity, setQuantity] = useState(1)
 
   const handleAddItemToList = () => {
-    if (!itemName.trim()) return
-    setNewItems([...newItems, { id: Date.now().toString(), name: itemName, status: 'pending' }])
-    setItemName('')
+    if (!selectedProductId) return
+
+    const product = products.find((p) => p.id === selectedProductId)
+    if (!product) return
+
+    setNewItems([
+      ...newItems,
+      { id: product.id, name: product.name, price: product.price, quantity, status: 'pending' }
+    ])
+    setSelectedProductId('')
+    setQuantity(1)
   }
 
   return (
     <div className="flex flex-col gap-4 mb-4">
       <div className="flex gap-2">
-        <Input value={itemName} onChange={(e) => setItemName(e.target.value)} placeholder="Novo item" />
-        <Button onClick={handleAddItemToList} disabled={!itemName.trim()}>
-          Adicionar à Lista
+        <Select onValueChange={setSelectedProductId} value={selectedProductId}>
+          <SelectTrigger>
+            <SelectValue placeholder="Selecione um produto" />
+          </SelectTrigger>
+          <SelectContent>
+            {products.map((product) => (
+              <SelectItem key={product.id} value={product.id}>
+                {product.name} - R$ {product.price.toFixed(2)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Input
+          type="number"
+          value={quantity}
+          min={1}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          className="w-20"
+          placeholder="Qtd"
+        />
+
+        <Button onClick={handleAddItemToList} disabled={!selectedProductId}>
+          Adicionar
         </Button>
       </div>
 
@@ -34,7 +67,9 @@ export const OrderItemInput = ({
           <p className="text-sm font-semibold mb-1">Itens pendentes:</p>
           <ul className="text-sm text-gray-700 list-disc ml-4">
             {newItems.map((item) => (
-              <li key={item.id}>{item.name}</li>
+              <li key={item.id}>
+                {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
+              </li>
             ))}
           </ul>
         </div>

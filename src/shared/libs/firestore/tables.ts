@@ -6,11 +6,6 @@ import { firebaseDocuments } from '../../helpers/constants'
 const tablesCollection = collection(db, firebaseDocuments.TABLES)
 const ordersCollection = collection(db, firebaseDocuments.ORDERS)
 
-export const getTables = async (): Promise<TTable[]> => {
-  const querySnapshot = await getDocs(tablesCollection)
-  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as TTable[]
-}
-
 export const addTable = async (table: TTableAdd): Promise<TTable> => {
   const newTable = { ...table, status: 'available', orders: [] }
   const docRef = await addDoc(tablesCollection, newTable)

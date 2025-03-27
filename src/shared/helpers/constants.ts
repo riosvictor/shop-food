@@ -1,7 +1,8 @@
 export const firebaseDocuments = {
   TABLES: 'tables',
   ORDERS: 'orders',
-  USERS: 'users'
+  USERS: 'users',
+  PRODUCTS: 'products'
 }
 
 export const userRoles = {

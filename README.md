@@ -16,6 +16,8 @@
   - 🆕 Mostra itens recém-adicionados.
   - ✅ Confirma os itens adicionados ao pedido.
   - 📊 Exibe o status dos itens.
+  - 📈 Adiciona quantidade a um item selecionado.
+  - 💰 Apresenta o preço do produto.
 
 ### 👩‍🍳 Tela 3 - Cozinha
 

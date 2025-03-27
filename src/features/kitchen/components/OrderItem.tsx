@@ -7,14 +7,16 @@ type OrderItemProps = {
 }
 
 export const OrderItem = ({ item }: OrderItemProps) => {
-  const { id: itemId, orderId, owner, tableName, name } = item
+  const { id: itemId, orderId, owner, tableName, name, quantity } = item
   const handleMarkAsDelivered = async () => {
     await updateItemStatus(orderId, itemId, 'delivered')
   }
 
   return (
     <div className="border p-4 rounded-lg shadow-md bg-white">
-      <p className="font-semibold">{name}</p>
+      <p className="font-semibold">
+        {quantity}x {name}
+      </p>
       <p className="text-sm text-gray-500">Dono: {owner}</p>
       <p className="text-sm text-gray-500">Local: {tableName}</p>
       <Button className="mt-2 bg-green-500 hover:bg-green-600 w-full" onClick={handleMarkAsDelivered}>

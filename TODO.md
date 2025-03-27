@@ -1,12 +1,8 @@
 - [ ] **Pedidos**
 
   - [ ] Poder remover pedidos antes de confirmar
-  - [ ] Adicionar quantidade no item selecionado
   - [ ] Melhorar a apresentação dos status dos itens
     - Atualmente está mostrando somente uma descrição, precisa mostrar um ícone ou cor para facilitar a visualização
-  - [ ] Usar uma select com busca ao invés de um input
-    - [ ] Pode ter uma lista de itens fixos inicialmente, depois precisa criar um CRUD com opção de disponibilidade
-    - [ ] Apresentar o preço do produto
 
 - [ ] **Cozinha**
 
