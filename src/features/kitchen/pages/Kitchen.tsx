@@ -8,7 +8,7 @@ const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] =
   const enrichedItems = filteredOrders.map((order) =>
     order.items
       .filter((item) => item.status === 'pending')
-      .map((item) => ({ ...item, owner: order.owner, tableName: order.tableName }))
+      .map((item) => ({ ...item, owner: order.owner, tableName: order.tableName, orderId: order.id }))
   )
   return enrichedItems.flat()
 }

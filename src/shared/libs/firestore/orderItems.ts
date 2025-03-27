@@ -8,7 +8,7 @@ export const updateItemStatus = async (orderId: string, itemId: string, status: 
   const orderSnap = await getDoc(orderRef)
 
   if (!orderSnap.exists()) {
-    // console.warn(`⚠️ Pedido ${orderId} não encontrado!`)
+    console.warn(`⚠️ Pedido ${orderId} não encontrado!`)
     return
   }
 
@@ -18,8 +18,8 @@ export const updateItemStatus = async (orderId: string, itemId: string, status: 
   // Verifica se realmente houve alteração antes de atualizar o documento
   if (JSON.stringify(orderData.items) !== JSON.stringify(updatedItems)) {
     await updateDoc(orderRef, { items: updatedItems })
-    // console.log(`✅ Item ${itemId} atualizado para ${status} no pedido ${orderId}`)
+    console.log(`✅ Item ${itemId} atualizado para ${status} no pedido ${orderId}`)
   } else {
-    // console.warn(`⚠️ Nenhuma alteração no status do item ${itemId}`)
+    console.warn(`⚠️ Nenhuma alteração no status do item ${itemId}`)
   }
 }

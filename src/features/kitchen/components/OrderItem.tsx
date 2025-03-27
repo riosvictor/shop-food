@@ -7,9 +7,9 @@ type OrderItemProps = {
 }
 
 export const OrderItem = ({ item }: OrderItemProps) => {
-  const { id: orderId, owner, tableName, name } = item
+  const { id: itemId, orderId, owner, tableName, name } = item
   const handleMarkAsDelivered = async () => {
-    await updateItemStatus(orderId, item.id, 'delivered')
+    await updateItemStatus(orderId, itemId, 'delivered')
   }
 
   return (

@@ -44,7 +44,7 @@ export type TOrderItem = {
   status: 'pending' | 'preparing' | 'delivered'
 }
 
-export type TOrderItemKitchen = TOrderItem & { owner: string; tableName: string }
+export type TOrderItemKitchen = TOrderItem & { owner: string; tableName: string; orderId: string }
 
 // User types
 export interface AuthUser extends User {
