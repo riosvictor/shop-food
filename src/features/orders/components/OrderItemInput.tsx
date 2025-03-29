@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { TOrderItem } from '../../../shared/types'
 import { useProducts } from '../../products/hooks/useProducts'
 import { Combobox } from '../../../shared/components/Combobox'
+import { X } from 'lucide-react'
 
 export const OrderItemInput = ({
   newItems,
@@ -20,16 +21,24 @@ export const OrderItemInput = ({
   const [selectedProductId, setSelectedProductId] = useState('')
   const [quantity, setQuantity] = useState(1)
 
+  console.log('availableProducts', availableProducts)
+
   const handleAddItemToList = () => {
     if (!selectedProductId) return
 
     const product = availableProducts.find((p) => p.id === selectedProductId)
     if (!product) return
+    const addItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity,
+      status: 'pending'
+    } as TOrderItem
 
-    setNewItems([
-      ...newItems,
-      { id: product.id, name: product.name, price: product.price, quantity, status: 'pending' }
-    ])
+    console.log('addItem', addItem)
+
+    setNewItems([...newItems, addItem])
     setSelectedProductId('')
     setQuantity(1)
   }
@@ -42,7 +51,7 @@ export const OrderItemInput = ({
           searchPlaceholder="Pesquisar produto"
           selectPlaceholder="Selecione um produto"
           items={availableProducts.map((product) => ({
-            value: product.name,
+            value: product.id,
             label: `${product.name} - R$ ${product.price.toFixed(2)}`
           }))}
           selectedValue={selectedProductId}
@@ -69,9 +78,17 @@ export const OrderItemInput = ({
         <div className="mt-2 p-2 border rounded bg-gray-100">
           <p className="text-sm font-semibold mb-1">Itens pendentes:</p>
           <ul className="text-sm text-gray-700 list-disc ml-4">
-            {newItems.map((item) => (
-              <li key={item.id}>
-                {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
+            {newItems.map((item, index) => (
+              <li key={item.id} className="flex justify-between items-center">
+                <span>
+                  {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
+                </span>
+                <button
+                  onClick={() => setNewItems(newItems.filter((_, i) => i !== index))}
+                  className="ml-2 text-red-500 hover:text-red-700"
+                >
+                  <X size={16} />
+                </button>
               </li>
             ))}
           </ul>

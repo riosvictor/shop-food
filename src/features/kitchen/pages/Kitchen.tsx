@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { listenOrders } from '@/shared/libs/firestore'
 import { TOrderItemKitchen, TOrderListener } from '@/shared/types'
-import { OrderItem } from '../components/OrderItem'
+import { OrderItemRow } from '../components/OrderItemRow'
 
 const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] => {
   const filteredOrders = orders.filter((order) => order.items.some((item) => item.status === 'pending'))
@@ -21,7 +21,6 @@ export const KitchenPage = () => {
   useEffect(() => {
     const unsubscribe = listenOrders((orders) => {
       setOrders(ordersWithPendingItems(orders))
-      // console.log('📌 Pedidos recebidos:', orders)
     })
     return () => unsubscribe()
   }, [])
@@ -32,10 +31,23 @@ export const KitchenPage = () => {
       {orders.length === 0 ? (
         <p className="text-gray-500 text-center">Nenhum item pendente.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {orders.map((order) => (
-            <OrderItem key={order.id} item={order} />
-          ))}
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border p-2 text-left">Quantidade</th>
+                <th className="border p-2 text-left">Item</th>
+                <th className="border p-2 text-left">Dono</th>
+                <th className="border p-2 text-left">Local</th>
+                <th className="border p-2 text-center">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <OrderItemRow key={order.id} item={order} />
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -20,7 +20,7 @@ export type TOrderItem = {
   name: string
   price: number
   quantity: number
-  status: 'pending' | 'preparing' | 'delivered'
+  status: 'pending' | 'delivered'
 }
 
 export type TOrderItemKitchen = TOrderItem & { owner: string; tableName: string; orderId: string }
