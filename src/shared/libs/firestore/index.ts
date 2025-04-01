@@ -1,5 +1,3 @@
-export * from './orderItems'
-export * from './orders'
 export * from './tables'
 export * from './usersAuthRbac'
 export * from './products'

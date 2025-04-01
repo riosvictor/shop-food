@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { listenOrders } from '@/shared/libs/firestore'
 import { TOrderItemKitchen, TOrderListener } from '@/shared/types'
 import { OrderItemRow } from '../components/OrderItemRow'
+import { OrderRepositoryFactory } from '@/shared/repositories/OrderRepositoryFactory'
 
 const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] => {
   const filteredOrders = orders.filter((order) => order.items.some((item) => item.status === 'pending'))
@@ -17,12 +17,14 @@ const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] =
 
 export const KitchenPage = () => {
   const [orders, setOrders] = useState<TOrderItemKitchen[]>([])
+  const orderRepository = OrderRepositoryFactory.create()
 
   useEffect(() => {
-    const unsubscribe = listenOrders((orders) => {
+    const unsubscribe = orderRepository.listenOrders((orders) => {
       setOrders(ordersWithPendingItems(orders))
     })
     return () => unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -1,7 +1,7 @@
 import { TOrderItemKitchen } from '@/shared/types'
-import { updateItemStatus } from '@/shared/libs/firestore'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { OrderRepositoryFactory } from '../../../shared/repositories/OrderRepositoryFactory'
 
 type OrderItemRowProps = {
   item: TOrderItemKitchen
@@ -10,13 +10,14 @@ type OrderItemRowProps = {
 export const OrderItemRow = ({ item }: OrderItemRowProps) => {
   const { id: itemId, orderId, owner, tableName, name, quantity } = item
   const [confirming, setConfirming] = useState(false)
+  const orderRepository = OrderRepositoryFactory.create()
 
   const handleMarkAsDelivered = async () => {
     if (!confirming) {
       setConfirming(true)
       return
     }
-    await updateItemStatus(orderId, itemId, 'delivered')
+    await orderRepository.updateItemStatus(orderId, itemId, 'delivered')
     setConfirming(false)
   }
 
