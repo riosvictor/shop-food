@@ -43,9 +43,10 @@ export const KitchenPage = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <OrderItemRow key={order.id} item={order} />
-              ))}
+              {orders.map((order, index) => {
+                const key = `order-${index}-${order.id}`
+                return <OrderItemRow key={key} item={order} />
+              })}
             </tbody>
           </table>
         </div>

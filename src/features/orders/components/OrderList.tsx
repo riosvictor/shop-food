@@ -21,10 +21,11 @@ export const OrderList = ({ order }: { order: TOrder | null }) => {
 
       {confirmedItems.length > 0 ? (
         <ul className="space-y-2 mb-4">
-          {confirmedItems.map((item) => {
+          {confirmedItems.map((item, index) => {
+            const key = `item-${index}-${item.id}`
             const statusInfo = statusIcons[item.status] || { icon: '❓', label: item.status }
             return (
-              <li key={item.id} className="flex justify-between items-center border-b pb-1">
+              <li key={key} className="flex justify-between items-center border-b pb-1">
                 <span>
                   {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
                 </span>

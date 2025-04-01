@@ -35,6 +35,7 @@ export function Combobox({
   emptyMessage = 'Nenhum resultado encontrado.'
 }: ComboboxProps) {
   const [open, setOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
 
   const handleSelect = (currentValue: string) => {
     if (currentValue === selectedValue) {
@@ -45,37 +46,38 @@ export function Combobox({
     setOpen(false)
   }
 
-  const searchItems = (searchValue: string) => {
-    return items.find((item) => item.value === searchValue)?.label
-  }
+  const filteredItems = items.filter((item) => item.label.toLowerCase().includes(searchValue.toLowerCase()))
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" role="combobox" aria-expanded={open} className="flex-1/2 w-full justify-between">
-          {selectedValue ? searchItems(selectedValue) : `${selectPlaceholder}...`}
+          {selectedValue ? items.find((item) => item.value === selectedValue)?.label : `${selectPlaceholder}...`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder={`${searchPlaceholder}...`} />
+          <CommandInput placeholder={`${searchPlaceholder}...`} value={searchValue} onValueChange={setSearchValue} />
           <CommandList>
-            <CommandEmpty>{emptyMessage}</CommandEmpty>
-            <CommandGroup>
-              {items.map((item) => (
-                <CommandItem
-                  key={item.value}
-                  value={item.value}
-                  onSelect={(currentValue) => {
-                    handleSelect(currentValue)
-                  }}
-                >
-                  <Check className={cn('mr-2 h-4 w-4', selectedValue === item.value ? 'opacity-100' : 'opacity-0')} />
-                  {item.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
+            {filteredItems.length === 0 ? (
+              <CommandEmpty>{emptyMessage}</CommandEmpty>
+            ) : (
+              <CommandGroup>
+                {filteredItems.map((item) => (
+                  <CommandItem
+                    key={item.value}
+                    value={item.value}
+                    onSelect={(currentValue) => {
+                      handleSelect(currentValue)
+                    }}
+                  >
+                    <Check className={cn('mr-2 h-4 w-4', selectedValue === item.value ? 'opacity-100' : 'opacity-0')} />
+                    {item.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            )}
           </CommandList>
         </Command>
       </PopoverContent>

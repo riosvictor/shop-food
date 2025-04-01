@@ -15,10 +15,16 @@ export const OrderPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    if (!tableId) return
+    if (!tableId || !orderId) return
     const unsubscribe = listenTableOrders(tableId, (orders) => {
-      const currentOrder = orders.find((o) => o.id === orderId) || null
-      setOrder(currentOrder)
+      setOrder((prevOrder) => {
+        const currentOrder = orders.find((o) => o.id === orderId) || null
+        // Only update state if the order has changed
+        if (JSON.stringify(prevOrder) !== JSON.stringify(currentOrder)) {
+          return currentOrder
+        }
+        return prevOrder
+      })
     })
     return () => unsubscribe()
   }, [tableId, orderId])
