@@ -42,7 +42,6 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }: ProductModalPr
   }, [editingProduct, setValue, reset])
 
   const onSubmit = async (data: TProductForm) => {
-    console.log(data)
     await upsertProduct(data)
     onClose()
     reset()

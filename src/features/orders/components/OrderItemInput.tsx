@@ -21,8 +21,6 @@ export const OrderItemInput = ({
   const [selectedProductId, setSelectedProductId] = useState('')
   const [quantity, setQuantity] = useState(1)
 
-  console.log('availableProducts', availableProducts)
-
   const handleAddItemToList = () => {
     if (!selectedProductId) return
 
@@ -35,8 +33,6 @@ export const OrderItemInput = ({
       quantity,
       status: 'pending'
     } as TOrderItem
-
-    console.log('addItem', addItem)
 
     setNewItems([...newItems, addItem])
     setSelectedProductId('')

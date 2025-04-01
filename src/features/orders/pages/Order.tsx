@@ -22,11 +22,8 @@ export const OrderPage = () => {
         const currentOrder = orders.find((o) => o.id === orderId) || null
         // Only update state if the order has changed
         if (JSON.stringify(prevOrder) !== JSON.stringify(currentOrder)) {
-          console.log('Order updated:', currentOrder)
           return currentOrder
         }
-        // If the order hasn't changed, return the previous state
-        console.log('Order not changed:', prevOrder)
         return prevOrder
       })
     })
