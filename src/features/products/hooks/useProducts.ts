@@ -1,13 +1,15 @@
 import { useEffect, useState, useCallback } from 'react'
-import { getProducts } from '@/shared/libs/firestore'
 import { TProduct } from '../../../shared/types/product'
+import { ProductRepositoryFactory } from '../../../shared/repositories'
 
 export const useProducts = () => {
   const [products, setProducts] = useState<TProduct[]>([])
   const [availableProducts, setAvailableProducts] = useState<TProduct[]>([])
+  const productsRepository = ProductRepositoryFactory.create()
 
   const fetchProducts = useCallback(async () => {
-    const data = await getProducts()
+    const data = await productsRepository.getProducts()
+    console.log('Fetched products:', data)
     setProducts(data)
     setAvailableProducts(data.filter((product) => product.available))
   }, [])

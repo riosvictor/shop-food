@@ -23,7 +23,7 @@
         "quantity": 4,
         "price": 9.87,
         "id": "Kils52wn3S9HGShkpQmG",
-        "status": "delivered",
+        "status": "pending",
         "name": "Sprite"
       },
       {
@@ -50,13 +50,6 @@
         "price": 14.99
       },
       {
-        "status": "delivered",
-        "name": "Sprite",
-        "price": 9.87,
-        "quantity": 1,
-        "id": "Kils52wn3S9HGShkpQmG"
-      },
-      {
         "quantity": 1,
         "status": "delivered",
         "id": "vbNQ5OrBGkfvBBl1TFbG",
@@ -64,25 +57,11 @@
         "price": 3.5
       },
       {
-        "price": 14.99,
-        "status": "delivered",
-        "quantity": 1,
-        "name": "Batata Frita",
-        "id": "fcoquz4gG9AtcddtYcsh"
-      },
-      {
         "name": "Batata Frita",
         "price": 14.99,
         "quantity": 1,
         "id": "fcoquz4gG9AtcddtYcsh",
         "status": "pending"
-      },
-      {
-        "name": "Queijo",
-        "id": "vbNQ5OrBGkfvBBl1TFbG",
-        "price": 3.5,
-        "quantity": 1,
-        "status": "delivered"
       }
     ],
     "tableId": "Cd1xQhNx0jPk1naSzP2A"

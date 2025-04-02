@@ -57,27 +57,24 @@ export function Combobox({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        <Command>
+        <Command shouldFilter={false}>
           <CommandInput placeholder={`${searchPlaceholder}...`} value={searchValue} onValueChange={setSearchValue} />
           <CommandList>
-            {filteredItems.length === 0 ? (
-              <CommandEmpty>{emptyMessage}</CommandEmpty>
-            ) : (
-              <CommandGroup>
-                {filteredItems.map((item) => (
-                  <CommandItem
-                    key={item.value}
-                    value={item.value}
-                    onSelect={(currentValue) => {
-                      handleSelect(currentValue)
-                    }}
-                  >
-                    <Check className={cn('mr-2 h-4 w-4', selectedValue === item.value ? 'opacity-100' : 'opacity-0')} />
-                    {item.label}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            )}
+            <CommandEmpty className="mx-4 my-1">{emptyMessage}</CommandEmpty>
+            <CommandGroup>
+              {filteredItems.map((item) => (
+                <CommandItem
+                  key={item.value}
+                  value={item.value}
+                  onSelect={(currentValue) => {
+                    handleSelect(currentValue)
+                  }}
+                >
+                  <Check className={cn('mr-2 h-4 w-4', selectedValue === item.value ? 'opacity-100' : 'opacity-0')} />
+                  {item.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
           </CommandList>
         </Command>
       </PopoverContent>

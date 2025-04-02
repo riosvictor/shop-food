@@ -1,4 +1,4 @@
-import { TOrder, TOrderItem, TOrderListener } from '../types'
+import { TOrder, TOrderItem, TOrderListener } from '../../types'
 
 export interface IOrderRepository {
   updateOrderStatus(orderId: string, status: string): Promise<void>

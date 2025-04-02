@@ -1,7 +1,7 @@
 import { TOrderItemKitchen } from '@/shared/types'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
-import { OrderRepositoryFactory } from '../../../shared/repositories/OrderRepositoryFactory'
+import { OrderRepositoryFactory } from '../../../shared/repositories'
 
 type OrderItemRowProps = {
   item: TOrderItemKitchen

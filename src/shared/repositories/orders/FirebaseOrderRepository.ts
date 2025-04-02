@@ -1,8 +1,8 @@
 import { collection, doc, updateDoc, onSnapshot, getDoc, arrayUnion, query, where } from 'firebase/firestore'
-import { db } from '../libs/firebase'
+import { db } from '../../libs/firebase'
 import { IOrderRepository } from './IOrderRepository'
-import { TOrder, TOrderItem, TOrderListener } from '../types'
-import { firebaseDocuments } from '../helpers/constants'
+import { TOrder, TOrderItem, TOrderListener } from '../../types'
+import { firebaseDocuments } from '../../helpers/constants'
 
 export class FirebaseOrderRepository implements IOrderRepository {
   private ordersCollection = collection(db, firebaseDocuments.ORDERS)

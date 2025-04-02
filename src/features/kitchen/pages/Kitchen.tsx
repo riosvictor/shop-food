@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { TOrderItemKitchen, TOrderListener } from '@/shared/types'
 import { OrderItemRow } from '../components/OrderItemRow'
-import { OrderRepositoryFactory } from '@/shared/repositories/OrderRepositoryFactory'
+import { OrderRepositoryFactory } from '@/shared/repositories'
 
 const ordersWithPendingItems = (orders: TOrderListener[]): TOrderItemKitchen[] => {
   const filteredOrders = orders.filter((order) => order.items.some((item) => item.status === 'pending'))

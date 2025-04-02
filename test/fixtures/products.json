@@ -1,0 +1,26 @@
+[
+  {
+    "price": 1.99,
+    "available": false,
+    "name": "Farofa",
+    "id": "4qxPB1WlonbMx76f5eXP"
+  },
+  {
+    "available": true,
+    "price": 9.87,
+    "name": "Sprite",
+    "id": "Kils52wn3S9HGShkpQmG"
+  },
+  {
+    "name": "Batata Frita",
+    "available": true,
+    "price": 14.99,
+    "id": "fcoquz4gG9AtcddtYcsh"
+  },
+  {
+    "available": true,
+    "price": 3.5,
+    "name": "Queijo",
+    "id": "vbNQ5OrBGkfvBBl1TFbG"
+  }
+]

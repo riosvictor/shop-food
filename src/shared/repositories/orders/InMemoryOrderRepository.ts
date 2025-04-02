@@ -1,7 +1,7 @@
 import { IOrderRepository } from './IOrderRepository'
-import { TOrder, TOrderItem, TOrderListener } from '../types'
+import { TOrder, TOrderItem, TOrderListener } from '../../types'
 
-import listKitchenOrders from '@/../test/fixtures/orders.json'
+import listOrders from '@/../test/fixtures/orders.json'
 
 export class InMemoryOrderRepository implements IOrderRepository {
   private static instance: InMemoryOrderRepository
@@ -10,7 +10,7 @@ export class InMemoryOrderRepository implements IOrderRepository {
   private constructor() {
     // Carrega os dados do localStorage ou usa os dados padrão
     const storedOrders = localStorage.getItem('orders')
-    this.orders = storedOrders ? JSON.parse(storedOrders) : listKitchenOrders
+    this.orders = storedOrders ? JSON.parse(storedOrders) : listOrders
   }
 
   public static getInstance(): InMemoryOrderRepository {

@@ -6,12 +6,13 @@ import { TProduct, TProductForm } from '../../../shared/types/product'
 import { useProducts } from '../hooks/useProducts'
 import { ProductTable } from '../components/ProductTable'
 import { ProductModal } from '../components/ProductModal'
-import { deleteProduct, toggleProductAvailability } from '../../../shared/libs/firestore'
+import { ProductRepositoryFactory } from '../../../shared/repositories'
 
 export const ProductsPage = () => {
   const { products, fetchProducts } = useProducts()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<TProductForm | null>(null)
+  const productRepository = ProductRepositoryFactory.create()
 
   const openModal = (product?: TProductForm) => {
     setEditingProduct(product || null)
@@ -28,12 +29,12 @@ export const ProductsPage = () => {
     const confirmDelete = confirm('Tem certeza que deseja excluir este produto?')
     if (!confirmDelete) return
 
-    await deleteProduct(id)
+    await productRepository.deleteProduct(id)
     fetchProducts()
   }
 
   const handleAvailability = async (product: TProduct) => {
-    await toggleProductAvailability(product)
+    await productRepository.toggleProductAvailability(product)
     fetchProducts()
   }
 

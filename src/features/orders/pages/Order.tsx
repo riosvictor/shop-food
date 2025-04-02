@@ -6,7 +6,7 @@ import { TOrder, TOrderItem } from '@/shared/types'
 import { OrderItemInput } from '../components/OrderItemInput'
 import { OrderList } from '../components/OrderList'
 import { ConfirmOrderModal } from '../components/ConfirmOrderModal'
-import { OrderRepositoryFactory } from '@/shared/repositories/OrderRepositoryFactory'
+import { OrderRepositoryFactory } from '@/shared/repositories'
 
 export const OrderPage = () => {
   const { tableId, orderId } = useParams<{ tableId: string; orderId: string }>()

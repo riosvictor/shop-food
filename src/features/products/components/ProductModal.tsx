@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { TProductForm } from '../../../shared/types/product'
-import { upsertProduct } from '../../../shared/libs/firestore'
+import { ProductRepositoryFactory } from '../../../shared/repositories'
 
 const productSchema = z.object({
   id: z.string().optional(),
@@ -29,6 +29,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }: ProductModalPr
     resolver: zodResolver(productSchema),
     defaultValues: { name: '', price: 0, available: true }
   })
+  const productRepository = ProductRepositoryFactory.create()
 
   useEffect(() => {
     if (editingProduct) {
@@ -42,7 +43,7 @@ export const ProductModal = ({ isOpen, onClose, editingProduct }: ProductModalPr
   }, [editingProduct, setValue, reset])
 
   const onSubmit = async (data: TProductForm) => {
-    await upsertProduct(data)
+    await productRepository.upsertProduct(data)
     onClose()
     reset()
   }
