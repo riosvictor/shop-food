@@ -11,6 +11,7 @@ export const useProducts = () => {
     const data = await productsRepository.getProducts()
     setProducts(data)
     setAvailableProducts(data.filter((product) => product.available))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

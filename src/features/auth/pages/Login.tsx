@@ -32,7 +32,8 @@ export const LoginPage = () => {
         description: 'Você foi autenticado com sucesso!'
       })
       navigate('/tables')
-    } catch {
+    } catch (e) {
+      console.log(e)
       toast.error('Erro de Login', {
         description: 'Credenciais inválidas!'
       })

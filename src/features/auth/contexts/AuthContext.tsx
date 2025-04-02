@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, useEffect, useState } from 'react'
-import { observeAuthState, login, logout, register } from '@/shared/libs/firestore'
 import { AuthUser } from '../../../shared/types'
+import { UserRepositoryFactory } from '../../../shared/repositories'
 
 interface AuthContextType {
   user: AuthUser | null
@@ -17,6 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [initialLoading, setInitialLoading] = useState(true)
+  const { login, logout, register, observeAuthState } = UserRepositoryFactory.create()
 
   useEffect(() => {
     const unsubscribe = observeAuthState((currentUser) => {
