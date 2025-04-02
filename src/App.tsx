@@ -68,10 +68,14 @@ const getComponent = (path: string) => {
   }
 }
 
-const App = () => (
-  <Router>
-    <AppContent />
-  </Router>
-)
+const App = () => {
+  const useInMemory = import.meta.env.VITE_USE_IN_MEMORY_REPOSITORY === 'true'
+  console.log(`App running with database on ${useInMemory ? 'Memory' : 'Firebase'}`)
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  )
+}
 
 export default App

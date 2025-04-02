@@ -9,7 +9,6 @@ export const useProducts = () => {
 
   const fetchProducts = useCallback(async () => {
     const data = await productsRepository.getProducts()
-    console.log('Fetched products:', data)
     setProducts(data)
     setAvailableProducts(data.filter((product) => product.available))
   }, [])

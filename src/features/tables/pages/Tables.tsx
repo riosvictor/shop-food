@@ -7,8 +7,6 @@ import { useTables } from '../hooks/useTables'
 
 export const TablesPage = () => {
   const { tables, loading, error, adding, addNewTable, addOrderToTableHandler } = useTables()
-  console.log(tables)
-
   const showTables = !loading && !error && tables.length > 0
 
   return (

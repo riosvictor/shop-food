@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { TOrderAdd, TTable } from '@/shared/types'
 import { toast } from 'sonner'
-import { TableRepositoryFactory } from '../../../shared/repositories/tables/TableRepositoryFactory'
+import { TableRepositoryFactory } from '../../../shared/repositories'
 
 export const useTables = () => {
   const [tables, setTables] = useState<TTable[]>([])
