@@ -1,0 +1,126 @@
+[
+  {
+    "id": "Cd1xQhNx0jPk1naSzP2A",
+    "status": "available",
+    "orders": [
+      {
+        "id": "HSuqHKn7xEDVgE7DYgKe",
+        "owner": "Paulo",
+        "tableName": "Mesa 1",
+        "items": [
+          {
+            "status": "delivered",
+            "name": "Pizza Margherita",
+            "id": "produto_123",
+            "price": 30,
+            "quantity": 3
+          },
+          {
+            "name": "Queijo",
+            "price": 3.5,
+            "id": "vbNQ5OrBGkfvBBl1TFbG",
+            "quantity": 1,
+            "status": "delivered"
+          },
+          {
+            "quantity": 4,
+            "price": 9.87,
+            "status": "delivered",
+            "id": "Kils52wn3S9HGShkpQmG",
+            "name": "Sprite"
+          },
+          {
+            "name": "Batata Frita",
+            "status": "delivered",
+            "id": "fcoquz4gG9AtcddtYcsh",
+            "quantity": 1,
+            "price": 14.99
+          }
+        ],
+        "status": "open",
+        "tableId": "Cd1xQhNx0jPk1naSzP2A"
+      },
+      {
+        "id": "aKDYS1CQ3XOPHZkOQqkF",
+        "status": "open",
+        "tableId": "Cd1xQhNx0jPk1naSzP2A",
+        "items": [
+          {
+            "status": "delivered",
+            "quantity": 1,
+            "id": "fcoquz4gG9AtcddtYcsh",
+            "price": 14.99,
+            "name": "Batata Frita"
+          },
+          {
+            "status": "delivered",
+            "name": "Sprite",
+            "id": "Kils52wn3S9HGShkpQmG",
+            "quantity": 1,
+            "price": 9.87
+          },
+          {
+            "id": "vbNQ5OrBGkfvBBl1TFbG",
+            "name": "Queijo",
+            "status": "delivered",
+            "quantity": 1,
+            "price": 3.5
+          },
+          {
+            "quantity": 1,
+            "id": "fcoquz4gG9AtcddtYcsh",
+            "status": "delivered",
+            "name": "Batata Frita",
+            "price": 14.99
+          },
+          {
+            "name": "Batata Frita",
+            "price": 14.99,
+            "status": "delivered",
+            "quantity": 1,
+            "id": "fcoquz4gG9AtcddtYcsh"
+          },
+          {
+            "name": "Queijo",
+            "status": "delivered",
+            "id": "vbNQ5OrBGkfvBBl1TFbG",
+            "quantity": 1,
+            "price": 3.5
+          },
+          {
+            "status": "pending",
+            "price": 9.87,
+            "quantity": 1,
+            "id": "Kils52wn3S9HGShkpQmG",
+            "name": "Sprite"
+          },
+          {
+            "price": 14.99,
+            "name": "Batata Frita",
+            "quantity": 1,
+            "id": "fcoquz4gG9AtcddtYcsh",
+            "status": "pending"
+          },
+          {
+            "price": 3.5,
+            "name": "Queijo",
+            "status": "pending",
+            "id": "vbNQ5OrBGkfvBBl1TFbG",
+            "quantity": 1
+          }
+        ],
+        "tableName": "Mesa 1",
+        "owner": "Odete"
+      }
+    ],
+    "name": "Mesa 1",
+    "number": 1
+  },
+  {
+    "id": "2UfibeEgbNbDZEZ6Kw2S",
+    "orders": [],
+    "status": "available",
+    "number": 2,
+    "name": "Mesa 2"
+  }
+]

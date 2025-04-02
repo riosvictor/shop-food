@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react'
-import { getTablesWithOrders, addTable, addOrderToTable } from '@/shared/libs/firestore'
 import { TOrderAdd, TTable } from '@/shared/types'
 import { toast } from 'sonner'
+import { TableRepositoryFactory } from '../../../shared/repositories/tables/TableRepositoryFactory'
 
 export const useTables = () => {
   const [tables, setTables] = useState<TTable[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [adding, setAdding] = useState(false)
+  const tableRepository = TableRepositoryFactory.create()
 
   useEffect(() => {
-    const unsubscribe = getTablesWithOrders((data) => {
+    const unsubscribe = tableRepository.getTablesWithOrders((data) => {
       setTables(data)
       setLoading(false)
     })
 
     return () => unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const addNewTable = async () => {
     setAdding(true)
     try {
       const tableNumber = tables.length + 1
-      await addTable({ name: `Mesa ${tableNumber}`, number: tableNumber })
+      await tableRepository.addTable({ name: `Mesa ${tableNumber}`, number: tableNumber })
       toast.success('Mesa adicionada com sucesso!')
     } catch (e) {
       const error = e as Error
@@ -37,7 +39,7 @@ export const useTables = () => {
 
   const addOrderToTableHandler = async (order: TOrderAdd) => {
     try {
-      const newOrder = await addOrderToTable(order)
+      const newOrder = await tableRepository.addOrderToTable(order)
 
       // Atualiza a mesa correspondente com o novo pedido
       setTables((prevTables) =>

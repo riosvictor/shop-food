@@ -48,7 +48,7 @@ export class InMemoryProductRepository implements IProductRepository {
         this.products[index] = { ...this.products[index], ...product }
       }
     } else {
-      const newProduct: TProduct = { ...product, id: String(Date.now()) }
+      const newProduct: TProduct = { ...product, id: crypto.randomUUID() }
       this.products.push(newProduct)
     }
     this.saveToLocalStorage()
