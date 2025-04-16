@@ -2,6 +2,8 @@
 
 ## 🌟 Funcionalidades do Aplicativo
 
+> Versão 1.0 (uso dos garçons)
+
 ### 🪑 Tela 1 - Mesas
 
 - 📋 Exibe mesas de forma ordenada.
@@ -20,6 +22,10 @@
   - 📈 Adiciona quantidade a um item selecionado.
   - 💰 Apresenta o preço do produto.
   - Possui uma lista de produtos com busca, tornando a experiência mais dinâmica.
+- 🏁 Finaliza o pedido:
+  - Exibe o valor total do pedido.
+  - Lista os itens do pedido, com valor unitário, quantidade, status e total.
+  - Possui um botão de confirmação, que leva o usuário para a tela de cozinha.
 
 ### 👩‍🍳 Tela 3 - Cozinha
 
@@ -33,6 +39,10 @@
 ## Níveis de acesso
 
 Para definir o nível de acesso, após o registro do usuário, vincula-se o UID do usuário ao nível de acesso desejado ('role') na coleção 'users' do Firestore.
+
+> Versão 2.0 (uso do cliente)
+>
+> #### 🚧 Em construção
 
 ## 🚀 Funcionalidades Futuras
 

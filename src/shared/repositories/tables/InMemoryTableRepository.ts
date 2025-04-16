@@ -1,15 +1,20 @@
 import listTables from '@/../test/fixtures/tables.json'
+import listOrders from '@/../test/fixtures/orders.json'
 import { ITableRepository } from './ITableRepository'
 import { TOrder, TOrderAdd, TTable, TTableAdd } from '../../types'
 
 export class InMemoryTableRepository implements ITableRepository {
   private static instance: InMemoryTableRepository
   private tables: TTable[] = []
+  private orders: TOrder[] = []
 
   private constructor() {
     // Load data from localStorage or use default data
     const storedTables = localStorage.getItem('tables')
     this.tables = storedTables ? JSON.parse(storedTables) : listTables
+
+    const storedOrders = localStorage.getItem('orders')
+    this.orders = storedOrders ? JSON.parse(storedOrders) : listOrders
   }
 
   public static getInstance(): InMemoryTableRepository {
@@ -56,7 +61,14 @@ export class InMemoryTableRepository implements ITableRepository {
   }
 
   getTablesWithOrders(callback: (tables: TTable[]) => void) {
-    callback(this.tables)
+    const tablesWithOpenOrders = this.tables.map((table) => {
+      const openOrders = this.orders.filter((order) => order.tableId === table.id && order.status === 'open')
+      return {
+        ...table,
+        orders: openOrders
+      }
+    })
+    callback(tablesWithOpenOrders)
     return () => {} // No-op for unsubscribe
   }
 }

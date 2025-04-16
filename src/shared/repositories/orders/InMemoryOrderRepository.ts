@@ -75,4 +75,12 @@ export class InMemoryOrderRepository implements IOrderRepository {
     // Retorna uma função de "unsubscribe" vazia
     return () => {}
   }
+
+  async closeOrder(orderId: string): Promise<void> {
+    const order = this.orders.find((o) => o.id === orderId)
+    if (order) {
+      order.status = 'closed'
+      this.saveToLocalStorage()
+    }
+  }
 }

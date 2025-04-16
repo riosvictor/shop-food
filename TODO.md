@@ -1,13 +1,30 @@
-- [ ] **Pedido**
+- Resumo da Versão 1.0 (uso dos garçons)
 
-  - [ ] Adicionar botão de fechar pedido
-    - [ ] Realizar o cálculo do pedido
-    - [ ] Apresentar um resumo do pedido
-    - [ ] Fechar o pedido
+### Funcionalidades Resumidas
 
-> Fim da versão 1.0 (uso dos garçons)
+- **Tela 1 - Mesas**:
+
+  - Exibição e gerenciamento de mesas.
+  - Adição de novas mesas com numeração incremental.
+  - Atualização automática das informações.
+  - Inclusão de pedidos vinculados às mesas.
+
+- **Tela 2 - Pedidos**:
+
+  - Visualização detalhada de pedidos.
+  - Adição de itens com confirmação prévia.
+  - Controle de status dos itens.
+  - Busca dinâmica de produtos.
+  - Finalização de pedidos com resumo detalhado e valor total.
+
+- **Tela 3 - Cozinha**:
+  - Exibição de itens pendentes em ordem de criação.
+  - Atualização em tempo real.
+  - Confirmação e atualização de status de itens entregues.
 
 ---
+
+## Funcionalidades Futuras
 
 - Pedido
 

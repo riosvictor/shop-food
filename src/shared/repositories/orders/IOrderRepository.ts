@@ -8,4 +8,6 @@ export interface IOrderRepository {
   addOrderItem(orderId: string, newItems: TOrderItem[]): Promise<void>
   removeOrderItem(orderId: string, itemId: string): Promise<void>
   updateItemStatus(orderId: string, itemId: string, status: string): Promise<void>
+
+  closeOrder(orderId: string): Promise<void>
 }

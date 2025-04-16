@@ -30,7 +30,11 @@ export class FirebaseTableRepository implements ITableRepository {
 
       // Buscar pedidos de cada mesa
       for (const table of tables) {
-        const ordersQuery = query(this.ordersCollection, where('tableId', '==', table.id))
+        const ordersQuery = query(
+          this.ordersCollection,
+          where('tableId', '==', table.id),
+          where('status', '==', 'open')
+        )
         const ordersSnapshot = await getDocs(ordersQuery)
         table.orders = ordersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as TOrder[]
       }

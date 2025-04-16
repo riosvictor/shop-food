@@ -64,4 +64,9 @@ export class FirebaseOrderRepository implements IOrderRepository {
       callback(orders)
     })
   }
+
+  async closeOrder(orderId: string): Promise<void> {
+    const orderRef = doc(db, firebaseDocuments.ORDERS, orderId)
+    await updateDoc(orderRef, { status: 'closed' })
+  }
 }
