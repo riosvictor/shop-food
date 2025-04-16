@@ -24,8 +24,20 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit, loading = false }) => 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <InputField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <InputField type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <InputField
+        id="input_email"
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <InputField
+        id="input_password"
+        type="password"
+        placeholder="Senha"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <Button type="submit" className="w-full bg-blue-500" disabled={loading}>
         {loading ? 'Carregando...' : 'Entrar'}
       </Button>

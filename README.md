@@ -47,3 +47,16 @@ Para definir o nível de acesso, após o registro do usuário, vincula-se o UID 
 ## 🚀 Funcionalidades Futuras
 
 Funcionalidades futuras estão descritas no documento [TODO.md](./TODO.md). Consulte-o para mais detalhes.
+
+## 🧪 Testes
+
+- Testes E2E com Cypress.
+  - Para executar os testes siga as instruções:
+    - Inicie o servidor de desenvolvimento:
+      ```bash
+      npm run test:start-app
+      ```
+    - Em outro terminal, inicie o Cypress:
+      ```bash
+      npm run test:cypress
+      ```

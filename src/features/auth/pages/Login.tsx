@@ -33,11 +33,10 @@ export const LoginPage = () => {
       })
       navigate('/tables')
     } catch (e) {
-      console.log(e)
+      console.error(e)
       toast.error('Erro de Login', {
         description: 'Credenciais inválidas!'
       })
-      throw new Error('Credenciais inválidas')
     } finally {
       setLoading(false)
     }

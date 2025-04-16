@@ -5,5 +5,12 @@
     "createdAt": "1742957426623",
     "lastLoginAt": "1743478388558",
     "role": "admin"
+  },
+  {
+    "uid": "81c2U3cS1RR3TRSnshbNsRjkFw34",
+    "email": "test.user@email.com",
+    "createdAt": "1742957426623",
+    "lastLoginAt": "1743478388558",
+    "role": "admin"
   }
 ]

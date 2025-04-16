@@ -24,7 +24,7 @@ export const Sidebar = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" className="fixed top-4 left-4" onClick={() => setOpen(!open)}>
+        <Button id="btn_menu_bar" variant="outline" className="fixed top-4 left-4" onClick={() => setOpen(!open)}>
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
@@ -53,7 +53,7 @@ export const Sidebar = () => {
             ))}
         </nav>
         <div className="absolute bottom-4 left-4">
-          <Button variant="destructive" onClick={handleLogout}>
+          <Button id="btn_logout" variant="destructive" onClick={handleLogout}>
             <LogOut className="mr-2 w-4 h-4" /> Sair
           </Button>
         </div>

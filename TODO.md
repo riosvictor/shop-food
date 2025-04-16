@@ -1,3 +1,22 @@
+### Funcionalidades Testadas
+
+> - não implementadas ainda
+
+| Funcionalidade                                   | Testada com Cypress |
+| ------------------------------------------------ | ------------------- |
+| Login com usuário inválido                       | ✅                  |
+| Login com usuário válido                         | ✅                  |
+| Logout                                           | ✅                  |
+| Restringir acesso a menus de acordo com a role\* |                     |
+| ---------------------------                      | ---------           |
+| Adicionar nova mesa                              |                     |
+| Adicionar pedido a mesa                          |                     |
+| Remover mesa\*                                   |                     |
+| Listagem correta das mesas                       |                     |
+| ---------------------------                      | ---------           |
+| Pedidos                                          |                     |
+| Cozinha                                          |                     |
+
 - Resumo da Versão 1.0 (uso dos garçons)
 
 ### Funcionalidades Resumidas
