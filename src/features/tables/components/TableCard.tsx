@@ -27,7 +27,7 @@ export const TableCard = ({ table, onAddOrder }: TableCardProps) => {
             <div className="space-y-4">
               <h3 className="text-md font-semibold">Pedidos</h3>
               {table.orders.map((order) => (
-                <div key={order.id} className="bg-gray-100 p-3 rounded-lg">
+                <div key={order.id} className="p-3 rounded-lg bg-gray-100 dark:bg-gray-800">
                   <h4 className="font-semibold text-sm">Pedido de {order.owner}</h4>
                   <Button
                     variant="secondary"

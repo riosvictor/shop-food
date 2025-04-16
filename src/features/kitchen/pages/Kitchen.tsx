@@ -34,9 +34,9 @@ export const KitchenPage = () => {
         <p className="text-gray-500 text-center">Nenhum item pendente.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
+          <table className="min-w-full bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100 dark:bg-gray-700">
                 <th className="border p-2 text-left">Quantidade</th>
                 <th className="border p-2 text-left">Item</th>
                 <th className="border p-2 text-left">Dono</th>

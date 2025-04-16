@@ -28,7 +28,7 @@ export const Sidebar = () => {
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-64 bg-white p-4">
+      <SheetContent side="left" className="w-64 p-4 bg-white dark:bg-zinc-900">
         <SheetHeader>
           <SheetTitle className="text-lg font-semibold mb-4">Menu</SheetTitle>
           <SheetDescription>Olá, {user.email}!</SheetDescription>
